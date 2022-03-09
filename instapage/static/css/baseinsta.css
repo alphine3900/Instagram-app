@@ -1,0 +1,62 @@
+body {
+    font-family: 'Courgette', cursive;
+    font-size: 3vh;
+  }
+  .navHomeLink {
+    font-family: 'Cookie', cursive;
+    font-size: 7vh;
+  }
+  .img-thumbnail img{
+      height: 50px;
+      width: 50px;
+  }
+  .navbar {
+    font-family: 'Lobster', cursive;
+  }
+  .top-buffer {
+    margin-top: 5%;
+  }
+  form {
+    font-family: 'Lobster', cursive;
+  }
+  .logo {
+    font-family: 'Lobster', cursive;
+    font-size: 7vh;
+    font-weight: normal;
+    margin-top: 3vh;
+    margin-bottom: 5vh;
+  
+  }
+  .smallFont {
+    font-family: 'Lobster', cursive;
+    font-size: 2.3vh;
+    color: blue;
+  }
+  .blueUnderline {
+    font-size: 3vh;
+    color: blue;
+    text-decoration: underline;
+  }
+  .userAvatar {
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 70px;
+    -moz-border-radius: 70px;
+    border-radius: 50%;
+  }
+  .userAvatar img {
+    width: 50px;
+    height: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50%;
+   
+  }
+  .imagePost {
+    max-width:100%;
+    max-height:100%;
+  }
+  .searchResults h2 {
+    font-family: 'Courgette', cursive;
+    font-size: 3vh;
+  }
