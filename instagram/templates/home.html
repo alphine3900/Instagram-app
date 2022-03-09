@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/baseinsta.css'%}">
+    <link href="https://fonts.googleapis.com/css?family=Cookie|Courgette|Lobster|News+Cycle&display=swap" rel="stylesheet">
+    <link href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+</head>
+<body>
+    <h1>welcome home</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/home"><img src="instapage/static/images/instagram-2165 (2).png" style="width:5vh; height:5vh;"> |</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link navHomeLink" href="/home">INSTAGRAM</a> <span class="sr-only">(current)</span></a>
+            </li>
+            
+          </ul>
+          <form class="form-inline navbar-form my-2 my-lg-0" role='search' action="{% url 'search_results' %}">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" name='username' aria-label="Search">
+            <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+          <ul class="navbar-nav ml-auto">
+          <li>
+          <a class="nav-link" href="/profile">
+          
+          {{request.user.username}} 
+          
+            <i class="fa fa-user-o" style="font-size:36px"></i></a>
+          </li>
+      
+          <li>
+          <a class="nav-link" href="/upload"> <i class="fa fa-cloud-upload" style="font-size:36px"></i>  </a>
+          </li>
+      
+           <li>
+          <a class="nav-link" href="/logout"><i class="fa fa-sign-out" style="font-size:36px"></i> </i></a>
+          </li>
+          
+          </ul>
+      
+      
+        </div>
+      </nav>
+      
+    <div class='container'>
+       
+      
+        <div class='row justify-content-center top-buffer'>
+          
+      
+          <div class='col-xs-7 col-sm-7 col-md-7 col-lg-7 d-block top-buffer'>
+            <div class='d-inline-flex'>
+              <div class="userAvatar mr-2"> <img class='img-thumbnail' height="50" width="50" src="instapage/static/images/download.jpeg" alt='userAvatar'>
+              </div>
+              <div class='text-center align-self-center'> <strong> {{ user.username}} </strong> </div>
+            </div>
+      
+          
+              <div class='justify-content-center'>
+                <img class='img-responsive imagePost' src="instapage/static/images/images (1).jpeg" alt='Image' data-toggle='modal'
+                  data-target="#{{item.id}}">
+              
+      
+              <!-- likes and comments -->
+              <p><button id="clickme"> <i class="fa fa-heart-o"></i></button>
+                <button id="followme"><i class="fa fa-commenting-o"></i></p></button> 
+                </p>
+             
+      
+              <!-- The Modal -->
+      
+              <div class="modal fade" id="{{item.id}}">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+      
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title"> {{item.name}} </h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+      
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      <div class='d-inline-flex'>
+      
+                        <div class="userAvatar mr-2"> <img class='img-thumbnail' src="{{item.user.prof_pic.cdn_url}}"
+                            alt='userAvatar'></div>
+      
+                        <div class='text-center align-self-center'> <strong> {{ user.username}} </strong> </div>
+                      </div>
+      
+                      <div class='d-flex justify-content-center'>
+                        <img class='img-responsive imagePost' src="{{ item.image.cdn_url }}" alt='image'>
+                      </div>
+      
+                      <p> {{item.name}} </p>
+                      <p> {{ item.caption }} </p>
+                      <p>{{item.like_set.all|length }} <i class="fa fa-heart-o"></i> {{ item.comment_set.all|length }} <i
+                          class="fa fa-commenting-o"></i></p>
+      
+                    </div>
+      
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+      
+                  </div>
+                </div>
+              </div>
+      
+              <!-- end modal -->
+      
+              <!-- list of posted comments -->
+      
+              {{ item.comment_set.all|length }} Comment(s)
+      
+              <ul style="list-style-type: none">
+                {% for comment in item.comment_set.all %}
+                <li> {{comment.comments}} </li>
+                {% endfor %}
+              </ul>
+      
+              <!-- end of list of comments -->
+              <div>
+      
+                <form action=" " method="post">
+      
+                  {% csrf_token %}
+                   
+                   <input type="text" placeholder="text">
+      
+                  <div class="form-group"> <br>
+      
+                    <button type="button" class="btn btn-secondary" id="post">post</button>
+      
+                    
+                  </div>
+                </form>
+              </div>
+      
+              <hr>
+            </div>
+      
+          </div>
+         
+      
+        </div>
+      </div>
+    </div>  
+      <script src="instapage/static/js/home.js"></script>
+</body>
+</html>
+<style>
+    .img-thumbnail{
+        height: 200px;
+        width: 200px;
+    }
+    .navHomeLink {
+    font-family: 'Cookie', cursive;
+    font-size: 7vh;
+  }
+  
+  
+  .navbar {
+    font-family: 'Lobster', cursive;
+  }
+  .top-buffer {
+    margin-top: 5%;
+  }
+  form {
+    font-family: 'Lobster', cursive;
+  }
+  .logo {
+    font-family: 'Lobster', cursive;
+    font-size: 7vh;
+    font-weight: normal;
+    margin-top: 3vh;
+    margin-bottom: 5vh;
+  
+  }
+  .smallFont {
+    font-family: 'Lobster', cursive;
+    font-size: 2.3vh;
+    color: blue;
+  }
+  .blueUnderline {
+    font-size: 3vh;
+    color: blue;
+    text-decoration: underline;
+  }
+  .userAvatar {
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 70px;
+    -moz-border-radius: 70px;
+    border-radius: 50%;
+  }
+  .userAvatar img {
+    width: 50px;
+    height: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50%;
+   
+  }
+  .imagePost {
+    max-width:100%;
+    max-height:100%;
+  }
+  .searchResults h2 {
+    font-family: 'Courgette', cursive;
+    font-size: 3vh;
+  }
+  body {
+     
+    font-family: 'Courgette', cursive;
+    font-size: 3vh;
+  }
+</style>
