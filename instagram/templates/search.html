@@ -1,0 +1,49 @@
+
+<div class='container'>
+  
+    <hr>
+  
+    <!-- search results -->
+  
+    <div class="row searchResults">
+      {% if searched_users %}
+      <h2>Found {{ searched_users|length }} image(s) posted by {{message}}</h2>
+      {% else %}
+      <h2> Found 0 images or users {{message}}</h2>
+      {% endif %}
+  
+    </div>
+  
+    <!-- end of search results -->
+  
+    <div class='row justify-content-center top-buffer'>
+    
+  
+      <div class='col-xs-7 col-sm-7 col-md-7 col-lg-7 d-block top-buffer'>
+  
+  
+        <div class='d-inline-flex'>
+          <div class="userAvatar mr-2"> <img class='img-thumbnail' src="{{photo.user.prof_pic.cdn_url}}" alt='userAvatar'>
+          </div>
+  
+          <div class='text-center align-self-center'> <strong> {{ photo.user.user.username}} </strong> </div>
+        </div>
+  
+  
+        <div class='d-flex justify-content-center'>
+          <img class='img-responsive imagePost' src="{{photo.image.cdn_url}}" alt='image'>
+        </div>
+  
+        <p> {{photo.name}} </p>
+        <p> {{ photo.caption }} </p>
+        <p>
+          {{ photo.like_set.all|length }} <i class="fa fa-heart-o"> </i> {{ photo.comment_set.all|length }} <i
+            class="fa fa-commenting-o"></i> </p>
+        <hr>
+  
+        <hr>
+      </div>
+     
+  
+    </div>
+  </div>
