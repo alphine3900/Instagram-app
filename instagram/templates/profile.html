@@ -30,8 +30,9 @@
                 data-target="#{{item.id}}">
       
               <!-- likes and comments -->
-              <p>{{ item.like_set.all|length }} <i class="fa fa-heart-o"></i>
-                {{ item.comment_set.all|length }} <i class="fa fa-commenting-o"></i></p>
+              <p><button id="clickme"> <i class="fa fa-heart-o"></i></button>
+                <button id="followme"><i class="fa fa-commenting-o"></i></p></button> 
+                </p>
       
               <!-- The Modal -->
       
@@ -114,11 +115,11 @@
         </div>
       </div>
       
-    
+      <script src="instapage/static/js/home.js"></script>
 </body>
 </html>
 <style>
 
 
-    
+
 </style>
