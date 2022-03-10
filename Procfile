@@ -1,0 +1,1 @@
+web: gunicorn instapage.wsgi --log-file -
